@@ -41,7 +41,7 @@ app.get("/sign", function (req, res) {
         if (err) {
             console.log(err);
         } else {
-            dssClient.upload(data);
+            dssClient.sign(data, res);
         }
     });
 });

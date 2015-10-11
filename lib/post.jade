@@ -1,0 +1,12 @@
+doctype html
+html(lang="en")
+    head
+        title DSS Redirect
+    body
+        h1 DSS Redirect
+        form(name='BrowserPostForm', action=actionUrl, method='post')
+            input(type='hidden', name='PendingRequest', value=pendingRequestValue)
+        script(type='text/javascript')
+            | window.onload = function() {
+            |     document.forms["BrowserPostForm"].submit();
+            | }

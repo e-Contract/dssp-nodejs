@@ -7,14 +7,17 @@
         "lib": "./lib"
     },
     "dependencies": {
-        "soap": "0.9.4"
+        "soap": "0.9.4",
+        "jade": "1.11.0"
     },
     "devDependencies": {
         "express": "4.13.3",
         "express-session": "1.11.3",
-        "body-parser": "1.14.1"
+        "body-parser": "1.14.1",
+        "nodeunit": "0.9.1"
     },
     "scripts": {
-        "test": "node tests/example.js"
+        "start": "node tests/example.js",
+        "test": "nodeunit tests/jade-test.js"
     }
 }
