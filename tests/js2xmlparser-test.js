@@ -2,9 +2,12 @@
 
 var js2xmlparser = require("js2xmlparser");
 var xmlCrypto = require('xml-crypto');
+var xmldom = require('xmldom');
+var crypto = require("crypto");
 
-function SecurityTokenReferenceKeyInfoProvider(tokenIdentifier) {
+function SecurityTokenReferenceKeyInfoProvider(tokenIdentifier, key) {
     this.tokenIdentifier = tokenIdentifier;
+    this.key = key;
 
     this.getKeyInfo = function (key, prefix) {
         var securityTokenReferenceData = {
@@ -24,6 +27,10 @@ function SecurityTokenReferenceKeyInfoProvider(tokenIdentifier) {
             }
         });
         return result;
+    };
+
+    this.getKey = function (keyInfo) {
+        return this.key;
     };
 }
 
@@ -52,11 +59,12 @@ exports['test js2xmlparser'] = function (test) {
     var result = js2xmlparser("async:PendingRequest", data);
     console.log(result);
     var signature = new xmlCrypto.SignedXml();
-    signature.signingKey = "1234";
+    var key = crypto.randomBytes(32);
+    signature.signingKey = key;
     signature.signatureAlgorithm = "http://www.w3.org/2000/09/xmldsig#hmac-sha1";
-    signature.addReference("/", ["http://www.w3.org/2000/09/xmldsig#enveloped-signature", "http://www.w3.org/2001/10/xml-exc-c14n#"],
+    signature.addReference("//*[local-name(.)='PendingRequest']", ["http://www.w3.org/2000/09/xmldsig#enveloped-signature", "http://www.w3.org/2001/10/xml-exc-c14n#"],
             "http://www.w3.org/2000/09/xmldsig#sha1", "", "", "", true);
-    signature.keyInfoProvider = new SecurityTokenReferenceKeyInfoProvider("a token identifier");
+    signature.keyInfoProvider = new SecurityTokenReferenceKeyInfoProvider("a token identifier", key);
     signature.computeSignature(result, {
         prefix: "ds",
         location: {
@@ -64,5 +72,16 @@ exports['test js2xmlparser'] = function (test) {
         }
     });
     console.log(signature.getSignedXml());
+
+    var doc = new xmldom.DOMParser().parseFromString(signature.getSignedXml());
+    var signatureElement = xmlCrypto.xpath(doc, "/*/*/*[local-name(.)='Signature' and namespace-uri(.)='http://www.w3.org/2000/09/xmldsig#']")[0];
+    console.log("signature: " + signatureElement);
+    var verify = new xmlCrypto.SignedXml();
+    verify.signingKey = "1234";
+    verify.loadSignature(signatureElement);
+    verify.keyInfoProvider = new SecurityTokenReferenceKeyInfoProvider("a token identifier", key);
+    var result = verify.checkSignature(signature.getSignedXml());
+    test.equal(result, true);
+
     test.done();
 };
