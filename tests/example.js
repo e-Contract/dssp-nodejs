@@ -41,9 +41,16 @@ app.get("/sign", function (req, res) {
         if (err) {
             console.log(err);
         } else {
-            dssClient.sign(data, res);
+            dssClient.sign(data, req.session, res);
         }
     });
+});
+
+app.post("/landing", function (req, res, next) {
+    console.log("landing");
+    var dssClient = new dssp.DSSP();
+    dssClient.handleSignResponse(req);
+    next();
 });
 
 app.use(express.static(__dirname + "/public"));
