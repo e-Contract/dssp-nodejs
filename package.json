@@ -20,7 +20,8 @@
         "js2xmlparser": "1.0.0",
         "xml-crypto": "0.8.0",
         "psha1": "0.1.1",
-        "xmldom": "0.1.19"
+        "xmldom": "0.1.19",
+        "moment": "2.10.6"
     },
     "devDependencies": {
         "express": "4.13.3",
@@ -30,6 +31,6 @@
     },
     "scripts": {
         "start": "node tests/example.js",
-        "test": "nodeunit tests/jade-test.js tests/js2xmlparser-test.js"
+        "test": "nodeunit tests/jade-test.js tests/js2xmlparser-test.js tests/moment-test.js"
     }
 }
