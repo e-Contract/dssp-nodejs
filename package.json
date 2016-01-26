@@ -15,18 +15,18 @@
         "lib": "./lib"
     },
     "dependencies": {
-        "soap": "0.9.4",
+        "soap": "0.11.4",
         "jade": "1.11.0",
         "js2xmlparser": "1.0.0",
-        "xml-crypto": "0.8.0",
+        "xml-crypto": "0.8.1",
         "psha1": "0.1.1",
-        "xmldom": "0.1.19",
-        "moment": "2.10.6"
+        "xmldom": "0.1.21",
+        "moment": "2.11.1"
     },
     "devDependencies": {
-        "express": "4.13.3",
-        "express-session": "1.11.3",
-        "body-parser": "1.14.1",
+        "express": "4.13.4",
+        "express-session": "1.13.0",
+        "body-parser": "1.14.2",
         "nodeunit": "0.9.1"
     },
     "scripts": {
