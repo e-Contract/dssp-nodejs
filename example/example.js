@@ -56,6 +56,21 @@ app.post("/landing", function (req, res, next) {
     res.redirect("index.html");
 });
 
+app.get("/verify", function (req, res) {
+    var dssClient = new dssp.DSSP();
+    fs.readFile("example/document-signed.pdf", function (err, data) {
+        if (err) {
+            console.log(err);
+        } else {
+            dssClient.verify(data, function (signatures) {
+                signatures.forEach(function (signature) {
+                    console.log("signature", signature);
+                });
+            });
+        }
+    });
+});
+
 app.use(express.static(__dirname + "/public"));
 
 var server = app.listen(3000, function () {
