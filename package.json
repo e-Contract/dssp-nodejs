@@ -15,13 +15,13 @@
         "lib": "./lib"
     },
     "dependencies": {
-        "soap": "0.11.4",
+        "soap": "0.12.0",
         "jade": "1.11.0",
         "js2xmlparser": "1.0.0",
-        "xml-crypto": "0.8.1",
+        "xml-crypto": "0.8.2",
         "psha1": "0.1.1",
-        "xmldom": "0.1.21",
-        "moment": "2.11.1"
+        "xmldom": "0.1.22",
+        "moment": "2.11.2"
     },
     "devDependencies": {
         "express": "4.13.4",
