@@ -40,7 +40,7 @@ app.use(session({
 
 app.get("/sign", function (req, res) {
     var dssClient = new dssp.DSSP();
-    fs.readFile("tests/document.pdf", function (err, data) {
+    fs.readFile("example/document.pdf", function (err, data) {
         if (err) {
             console.log(err);
         } else {

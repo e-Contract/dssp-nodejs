@@ -31,7 +31,7 @@
         "ansi": "0.3.1"
     },
     "scripts": {
-        "start": "node tests/example.js",
-        "test": "nodeunit tests/jade-test.js tests/js2xmlparser-test.js tests/moment-test.js"
+        "start": "node example/example.js",
+        "test": "nodeunit test/jade-test.js test/js2xmlparser-test.js test/moment-test.js"
     }
 }
