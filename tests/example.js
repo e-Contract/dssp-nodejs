@@ -1,6 +1,6 @@
 /*
  * Digital Signature Service Protocol Project.
- * Copyright (C) 2015 e-Contract.be BVBA.
+ * Copyright (C) 2015-2016 e-Contract.be BVBA.
  *
  * This is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License version
@@ -18,6 +18,9 @@
 
 "use strict";
 var dssp = require("../index");
+
+var ansi = require('ansi');
+var cursor = ansi(process.stdout);
 
 var fs = require("fs");
 
@@ -50,7 +53,7 @@ app.post("/landing", function (req, res, next) {
     console.log("landing");
     var dssClient = new dssp.DSSP();
     dssClient.handleSignResponse(req);
-    next();
+    res.redirect("index.html");
 });
 
 app.use(express.static(__dirname + "/public"));
@@ -58,6 +61,10 @@ app.use(express.static(__dirname + "/public"));
 var server = app.listen(3000, function () {
     var host = server.address().address;
     var port = server.address().port;
-    console.log('Example app listening at http://%s:%s', host, port);
+    cursor.fg.blue();
+    cursor.bold();
+    cursor.write("Example app listening at http://" + host + ":" + port);
+    cursor.fg.reset();
+    cursor.write("\n");
 });
 

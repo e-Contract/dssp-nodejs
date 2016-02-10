@@ -27,7 +27,8 @@
         "express": "4.13.4",
         "express-session": "1.13.0",
         "body-parser": "1.14.2",
-        "nodeunit": "0.9.1"
+        "nodeunit": "0.9.1",
+        "ansi": "0.3.1"
     },
     "scripts": {
         "start": "node tests/example.js",
