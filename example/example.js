@@ -71,6 +71,21 @@ app.get("/verify", function (req, res) {
     });
 });
 
+app.get("/verify2", function (req, res) {
+    var dssClient = new dssp.DSSP();
+    fs.readFile("example/document-signed-2.pdf", function (err, data) {
+        if (err) {
+            console.log(err);
+        } else {
+            dssClient.verify(data, function (signatures) {
+                signatures.forEach(function (signature) {
+                    console.log("signature", signature);
+                });
+            });
+        }
+    });
+});
+
 app.use(express.static(__dirname + "/public"));
 
 var server = app.listen(3000, function () {
