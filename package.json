@@ -16,7 +16,7 @@
     },
     "dependencies": {
         "soap": "0.21.0",
-        "jade": "1.11.0",
+        "pug": "2.0.0-rc.4",
         "js2xmlparser": "3.0.0",
         "xml-crypto": "0.8.2",
         "psha1": "0.1.1",
@@ -33,6 +33,6 @@
     },
     "scripts": {
         "start": "node example/example.js",
-        "test": "nodeunit test/jade-test.js test/js2xmlparser-test.js test/moment-test.js"
+        "test": "nodeunit test/pug-test.js test/js2xmlparser-test.js test/moment-test.js"
     }
 }
