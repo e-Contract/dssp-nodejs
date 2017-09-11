@@ -1,6 +1,6 @@
 /*
  * Digital Signature Service Protocol Project.
- * Copyright (C) 2015-2016 e-Contract.be BVBA.
+ * Copyright (C) 2015-2017 e-Contract.be BVBA.
  *
  * This is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License version
@@ -66,6 +66,7 @@ app.get("/verify", function (req, res) {
                 signatures.forEach(function (signature) {
                     console.log("signature", signature);
                 });
+                res.redirect("index.html");
             });
         }
     });
@@ -81,6 +82,7 @@ app.get("/verify2", function (req, res) {
                 signatures.forEach(function (signature) {
                     console.log("signature", signature);
                 });
+                res.redirect("index.html");
             });
         }
     });
