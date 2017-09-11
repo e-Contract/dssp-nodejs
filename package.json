@@ -21,7 +21,8 @@
         "xml-crypto": "0.8.2",
         "psha1": "0.1.1",
         "xmldom": "0.1.27",
-        "moment": "2.18.1"
+        "moment": "2.18.1",
+        "ejs": "2.5.7"
     },
     "devDependencies": {
         "express": "4.15.4",
