@@ -38,6 +38,9 @@ app.use(session({
     saveUninitialized: true
 }));
 
+app.set('views', './example/views');
+app.set('view engine', 'pug');
+
 app.get("/sign", function (req, res) {
     var dssClient = new dssp.DSSP();
     fs.readFile("example/document.pdf", function (err, data) {
@@ -63,10 +66,11 @@ app.get("/verify", function (req, res) {
             console.log(err);
         } else {
             dssClient.verify(data, function (signatures) {
+                req.session.signatures = signatures;
                 signatures.forEach(function (signature) {
                     console.log("signature", signature);
                 });
-                res.redirect("index.html");
+                res.redirect("result");
             });
         }
     });
@@ -79,12 +83,22 @@ app.get("/verify2", function (req, res) {
             console.log(err);
         } else {
             dssClient.verify(data, function (signatures) {
+                req.session.signatures = signatures;
                 signatures.forEach(function (signature) {
                     console.log("signature", signature);
                 });
-                res.redirect("index.html");
+                res.redirect("result");
             });
         }
+    });
+});
+
+app.get("/result", function (req, res) {
+    req.session.signatures.forEach(function (signature) {
+        console.log("session signature", signature);
+    });
+    res.render('result', {
+        signatures: req.session.signatures
     });
 });
 

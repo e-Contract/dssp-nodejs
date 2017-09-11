@@ -1,0 +1,10 @@
+html
+  head
+    title DSS results
+  body
+    h1 DSS results
+    ul
+        for signature in signatures
+            li= signature.subject
+    form(action='./')
+        input(type='submit', value='Back')
