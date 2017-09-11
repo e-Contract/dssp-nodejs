@@ -7,9 +7,11 @@
         "email": "info@e-contract.be"
     },
     "keywords": [
-        "dssp", "dss"
+        "dssp",
+        "dss"
     ],
-    "license": "LGPL",
+    "homepage": "https://www.e-contract.be",
+    "license": "LGPL-3.0",
     "main": "./index.js",
     "directories": {
         "lib": "./lib"
