@@ -17,16 +17,14 @@
  */
 
 "use strict";
+
 var dssp = require("../index");
 
 var ansi = require('ansi');
 var cursor = ansi(process.stdout);
-
 var fs = require("fs");
-
 var express = require('express');
 var app = express();
-
 var bodyParser = require('body-parser');
 
 app.use(bodyParser.urlencoded({extended: false}));
@@ -38,7 +36,7 @@ app.use(session({
     saveUninitialized: true
 }));
 
-app.set('views', './example/views');
+app.set('views', __dirname + '/views');
 app.set('view engine', 'pug');
 
 app.get("/sign", function (req, res) {
@@ -55,8 +53,10 @@ app.get("/sign", function (req, res) {
 app.post("/landing", function (req, res, next) {
     console.log("landing");
     var dssClient = new dssp.DSSP();
-    dssClient.handleSignResponse(req);
-    res.redirect("index.html");
+    dssClient.handleSignResponse(req, function (result, signedDocument) {
+        console.log("result: " + result.result);
+        res.redirect("index.html");
+    });
 });
 
 app.get("/verify", function (req, res) {
@@ -65,7 +65,7 @@ app.get("/verify", function (req, res) {
         if (err) {
             console.log(err);
         } else {
-            dssClient.verify(data, function (signatures) {
+            dssClient.verify(data, function (result, signatures) {
                 req.session.signatures = signatures;
                 signatures.forEach(function (signature) {
                     console.log("signature", signature);
@@ -82,7 +82,8 @@ app.get("/verify2", function (req, res) {
         if (err) {
             console.log(err);
         } else {
-            dssClient.verify(data, function (signatures) {
+            dssClient.verify(data, function (result, signatures) {
+                req.session.result = result;
                 req.session.signatures = signatures;
                 signatures.forEach(function (signature) {
                     console.log("signature", signature);
@@ -98,6 +99,7 @@ app.get("/result", function (req, res) {
         console.log("session signature", signature);
     });
     res.render('result', {
+        result: req.session.result,
         signatures: req.session.signatures
     });
 });
@@ -109,7 +111,9 @@ var server = app.listen(3000, function () {
     var port = server.address().port;
     cursor.fg.blue();
     cursor.bold();
-    cursor.write("Example app listening at http://" + host + ":" + port);
+    cursor.write("Example DSS NodeJS application listening at http://" + host + ":" + port + "\n");
+    cursor.fg.red();
+    cursor.write("Copyright (C) 2015-2017 e-Contract.BVBA\n");
     cursor.fg.reset();
     cursor.write("\n");
 });

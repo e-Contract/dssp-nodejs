@@ -3,8 +3,10 @@ html
     title DSS results
   body
     h1 DSS results
+    - var resultString = "Result " + result.result
+    p= resultString
     ul
         for signature in signatures
-            li= signature.subject
+            li= signature.subject + " at " + signature.signingTime
     form(action='./')
         input(type='submit', value='Back')
