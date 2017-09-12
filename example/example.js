@@ -66,6 +66,7 @@ app.get("/verify", function (req, res) {
             console.log(err);
         } else {
             dssClient.verify(data, function (result, signatures) {
+                req.session.result = result;
                 req.session.signatures = signatures;
                 signatures.forEach(function (signature) {
                     console.log("signature", signature);

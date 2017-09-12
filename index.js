@@ -18,4 +18,7 @@
 
 "use strict";
 
+/**
+ * @module dssp
+ */
 module.exports = require("./lib/dssp.js");
