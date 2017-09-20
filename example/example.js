@@ -41,7 +41,7 @@ app.set('view engine', 'pug');
 
 app.get("/sign", function (req, res) {
     var dssClient = new dssp.DSSP();
-    var landingUrl = "http://0.0.0.0:3000/landing";
+    var landingUrl = "http://localhost:3000/landing";
     fs.readFile("example/document.pdf", function (err, data) {
         if (err) {
             console.log(err);
