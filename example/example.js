@@ -55,7 +55,22 @@ app.post("/landing", function (req, res, next) {
     var dssClient = new dssp.DSSP();
     dssClient.handleSignResponse(req, function (result, signedDocument) {
         console.log("result: " + result.result);
-        res.redirect("index.html");
+        if (result.result === dssp.DSSP_RESULT.SUCCESS) {
+            console.log("success");
+            dssClient.verify(signedDocument, function (verifyResult, signatures) {
+                req.session.result = verifyResult;
+                req.session.signatures = signatures;
+                signatures.forEach(function (signature) {
+                    console.log("signature", signature);
+                });
+                res.redirect("result");
+            });
+        } else {
+            console.log("not a success");
+            req.session.result = result;
+            req.session.signatures = [];
+            res.redirect("result");
+        }
     });
 });
 
