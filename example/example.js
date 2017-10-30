@@ -73,14 +73,22 @@ app.post("/landing", function (req, res, next) {
     dssClient.handleSignResponse(req)
         .then(signedDocument => {
             console.log("success");
-            dssClient.verify(signedDocument, function (verifyResult, signatures) {
-                req.session.result = verifyResult;
-                req.session.signatures = signatures;
-                signatures.forEach(function (signature) {
-                    console.log("signature", signature);
+            dssClient.verify(signedDocument)
+                .then(signatures => {
+                    req.session.result = dssp.DSSP_RESULT.SUCCESS;
+                    req.session.signatures = signatures;
+                    signatures.forEach(function (signature) {
+                        console.log("signature", signature);
+                    });
+                    res.redirect("result");
+                })
+                .catch(error => {
+                    console.error("not a success");
+                    console.error(error);
+                    req.session.result = error.message;
+                    req.session.signatures = [];
+                    res.redirect("result");
                 });
-                res.redirect("result");
-            });
         })
         .catch(error => {
             console.error("not a success");
@@ -97,14 +105,22 @@ app.get("/verify", function (req, res) {
         if (err) {
             console.error(err);
         } else {
-            dssClient.verify(data, function (result, signatures) {
-                req.session.result = result;
-                req.session.signatures = signatures;
-                signatures.forEach(function (signature) {
-                    console.log("signature", signature);
+            dssClient.verify(data)
+                .then(signatures => {
+                    req.session.result = dssp.DSSP_RESULT.SUCCESS;
+                    req.session.signatures = signatures;
+                    signatures.forEach(function (signature) {
+                        console.log("signature", signature);
+                    });
+                    res.redirect("result");
+                })
+                .catch(error => {
+                    console.error("not a success");
+                    console.error(error);
+                    req.session.result = error.message;
+                    req.session.signatures = [];
+                    res.redirect("result");
                 });
-                res.redirect("result");
-            });
         }
     });
 });
@@ -115,14 +131,22 @@ app.get("/verify2", function (req, res) {
         if (err) {
             console.log(err);
         } else {
-            dssClient.verify(data, function (result, signatures) {
-                req.session.result = result;
-                req.session.signatures = signatures;
-                signatures.forEach(function (signature) {
-                    console.log("signature", signature);
+            dssClient.verify(data)
+                .then(signatures => {
+                    req.session.result = dssp.DSSP_RESULT.SUCCESS;
+                    req.session.signatures = signatures;
+                    signatures.forEach(function (signature) {
+                        console.log("signature", signature);
+                    });
+                    res.redirect("result");
+                })
+                .catch(error => {
+                    console.error("not a success");
+                    console.error(error);
+                    req.session.result = error.message;
+                    req.session.signatures = [];
+                    res.redirect("result");
                 });
-                res.redirect("result");
-            });
         }
     });
 });
