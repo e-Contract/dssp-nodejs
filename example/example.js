@@ -52,7 +52,19 @@ app.get("/sign", function (req, res) {
         if (err) {
             console.log(err);
         } else {
-            dssClient.sign(data, req.session, landingUrl, res, options);
+            dssClient.sign(data, req.session, landingUrl, res, options)
+                .then(_ => {
+                    console.log("request sent");
+                })
+                .catch(error => {
+                    console.error("error sending request: " + error);
+                    console.log(error);
+                    req.session.result = {
+                        result: error.message
+                    };
+                    req.session.signatures = [];
+                    res.redirect("result");
+                });
         }
     });
 });
