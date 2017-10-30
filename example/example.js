@@ -58,10 +58,8 @@ app.get("/sign", function (req, res) {
                 })
                 .catch(error => {
                     console.error("error sending request: " + error);
-                    console.log(error);
-                    req.session.result = {
-                        result: error.message
-                    };
+                    console.error(error);
+                    req.session.result = error.message;
                     req.session.signatures = [];
                     res.redirect("result");
                 });
@@ -72,9 +70,8 @@ app.get("/sign", function (req, res) {
 app.post("/landing", function (req, res, next) {
     console.log("landing");
     var dssClient = new dssp.DSSP();
-    dssClient.handleSignResponse(req, function (result, signedDocument) {
-        console.log("result: " + result.result);
-        if (result.result === dssp.DSSP_RESULT.SUCCESS) {
+    dssClient.handleSignResponse(req)
+        .then(signedDocument => {
             console.log("success");
             dssClient.verify(signedDocument, function (verifyResult, signatures) {
                 req.session.result = verifyResult;
@@ -84,20 +81,21 @@ app.post("/landing", function (req, res, next) {
                 });
                 res.redirect("result");
             });
-        } else {
-            console.log("not a success");
-            req.session.result = result;
+        })
+        .catch(error => {
+            console.error("not a success");
+            console.error(error);
+            req.session.result = error.message;
             req.session.signatures = [];
             res.redirect("result");
-        }
-    });
+        });
 });
 
 app.get("/verify", function (req, res) {
     var dssClient = new dssp.DSSP();
     fs.readFile("example/document-signed.pdf", function (err, data) {
         if (err) {
-            console.log(err);
+            console.error(err);
         } else {
             dssClient.verify(data, function (result, signatures) {
                 req.session.result = result;
