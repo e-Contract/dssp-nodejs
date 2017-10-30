@@ -40,13 +40,18 @@ app.set('views', __dirname + '/views');
 app.set('view engine', 'pug');
 
 app.get("/sign", function (req, res) {
+    var language = req.query["language"];
+    //console.log("language: " + language);
     var dssClient = new dssp.DSSP();
     var landingUrl = "http://localhost:3000/landing";
+    var options = {
+        language: language
+    };
     fs.readFile("example/document.pdf", function (err, data) {
         if (err) {
             console.log(err);
         } else {
-            dssClient.sign(data, req.session, landingUrl, res);
+            dssClient.sign(data, req.session, landingUrl, res, options);
         }
     });
 });

@@ -11,6 +11,13 @@ npm start
 ```
 Point your web browser to: http://localhost:3000/
 
+## NPM package
+
+Install via NPM within your project:
+```
+npm install --save dssp-nodejs
+```
+
 ## Specifications
 
 The Digital Signature Service Protocol specifications are available at the [e-Contract.be DSSP Maven project site](https://www.e-contract.be/sites/dssp/).

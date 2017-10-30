@@ -1,17 +1,25 @@
 <html>
-    <head>
-        <title>DSSP Example for NodeJS</title>
-    </head>
-    <body>
-        <h1>DSSP Example for NodeJS</h1>
-        <form action="sign">
-            <input type="submit" value="Sign"/>
-        </form>
-        <form action="verify">
-            <input type="submit" value="Verify signed document"/>
-        </form>
-        <form action="verify2">
-            <input type="submit" value="Verify signed document 2"/>
-        </form>
-    </body>
+
+<head>
+    <title>DSSP Example for NodeJS</title>
+</head>
+
+<body>
+    <h1>DSSP Example for NodeJS</h1>
+    <form action="sign">
+        <select name="language">
+            <option value="nl">Nederlands</option>
+            <option value="en">English</option>
+            <option value="fr">Francais</option>
+        </select>
+        <input type="submit" value="Sign" />
+    </form>
+    <form action="verify">
+        <input type="submit" value="Verify signed document" />
+    </form>
+    <form action="verify2">
+        <input type="submit" value="Verify signed document 2" />
+    </form>
+</body>
+
 </html>
