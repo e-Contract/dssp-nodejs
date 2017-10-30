@@ -28,7 +28,8 @@
         "psha1": "0.1.1",
         "xmldom": "0.1.27",
         "moment": "2.19.1",
-        "ejs": "2.5.7"
+        "ejs": "2.5.7",
+        "uuid": "3.1.0"
     },
     "devDependencies": {
         "express": "4.16.2",
