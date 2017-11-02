@@ -151,6 +151,32 @@ app.get("/verify2", function (req, res) {
     });
 });
 
+app.get("/verify3", function (req, res) {
+    var dssClient = new dssp.DSSP();
+    fs.readFile("example/document.pdf", function (err, data) {
+        if (err) {
+            console.log(err);
+        } else {
+            dssClient.verify(data)
+                .then(signatures => {
+                    req.session.result = dssp.DSSP_RESULT.SUCCESS;
+                    req.session.signatures = signatures;
+                    signatures.forEach(function (signature) {
+                        console.log("signature", signature);
+                    });
+                    res.redirect("result");
+                })
+                .catch(error => {
+                    console.error("not a success");
+                    console.error(error);
+                    req.session.result = error.message;
+                    req.session.signatures = [];
+                    res.redirect("result");
+                });
+        }
+    });
+});
+
 app.get("/result", function (req, res) {
     req.session.signatures.forEach(function (signature) {
         console.log("session signature", signature);
