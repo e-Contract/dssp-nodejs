@@ -1,6 +1,6 @@
 {
     "name": "dssp-nodejs",
-    "version": "0.2.0",
+    "version": "0.3.0",
     "description": "DSSP library for Node.js",
     "author": {
         "name": "Frank Cornelis",
