@@ -1,6 +1,6 @@
 /*
  * Digital Signature Service Protocol Project.
- * Copyright (C) 2015-2017 e-Contract.be BVBA.
+ * Copyright (C) 2015-2018 e-Contract.be BVBA.
  *
  * This is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License version
@@ -196,7 +196,7 @@ var server = app.listen(3000, function () {
     cursor.bold();
     cursor.write("Example DSS NodeJS application listening at http://" + host + ":" + port + "\n");
     cursor.fg.red();
-    cursor.write("Copyright (C) 2015-2017 e-Contract.BVBA\n");
+    cursor.write("Copyright (C) 2015-2018 e-Contract.BVBA\n");
     cursor.fg.reset();
     cursor.write("\n");
 });
