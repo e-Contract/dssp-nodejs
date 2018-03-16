@@ -1,45 +1,45 @@
 {
-    "name": "dssp-nodejs",
-    "version": "0.3.0",
-    "description": "DSSP library for Node.js",
-    "author": {
-        "name": "Frank Cornelis",
-        "email": "info@e-contract.be"
-    },
-    "keywords": [
-        "dssp",
-        "dss"
-    ],
-    "homepage": "https://www.e-contract.be",
-    "license": "LGPL-3.0",
-    "main": "./index.js",
-    "directories": {
-        "lib": "./lib"
-    },
-    "repository": {
-        "type" : "git",
-        "url" : "https://github.com/e-Contract/dssp-nodejs.git"
-    },
-    "dependencies": {
-        "soap": "0.23.0",
-        "pug": "2.0.1",
-        "js2xmlparser": "3.0.0",
-        "xml-crypto": "0.10.1",
-        "psha1": "0.1.1",
-        "xmldom": "0.1.27",
-        "moment": "2.21.0",
-        "ejs": "2.5.7",
-        "uuid": "3.2.1"
-    },
-    "devDependencies": {
-        "express": "4.16.3",
-        "express-session": "1.15.6",
-        "body-parser": "1.18.2",
-        "nodeunit": "0.11.2",
-        "ansi": "0.3.1"
-    },
-    "scripts": {
-        "start": "node example/example.js",
-        "test": "nodeunit test/pug-test.js test/js2xmlparser-test.js test/moment-test.js"
-    }
+  "name": "dssp-nodejs",
+  "version": "0.3.1",
+  "description": "DSSP library for Node.js",
+  "author": {
+    "name": "Frank Cornelis",
+    "email": "info@e-contract.be"
+  },
+  "keywords": [
+    "dssp",
+    "dss"
+  ],
+  "homepage": "https://www.e-contract.be",
+  "license": "LGPL-3.0",
+  "main": "./index.js",
+  "directories": {
+    "lib": "./lib"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/e-Contract/dssp-nodejs.git"
+  },
+  "dependencies": {
+    "soap": "0.23.0",
+    "pug": "2.0.1",
+    "js2xmlparser": "3.0.0",
+    "xml-crypto": "0.10.1",
+    "psha1": "0.1.1",
+    "xmldom": "0.1.27",
+    "moment": "2.21.0",
+    "ejs": "2.5.7",
+    "uuid": "3.2.1"
+  },
+  "devDependencies": {
+    "express": "4.16.3",
+    "express-session": "1.15.6",
+    "body-parser": "1.18.2",
+    "nodeunit": "0.11.2",
+    "ansi": "0.3.1"
+  },
+  "scripts": {
+    "start": "node example/example.js",
+    "test": "nodeunit test/pug-test.js test/js2xmlparser-test.js test/moment-test.js"
+  }
 }
