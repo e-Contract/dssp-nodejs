@@ -1,6 +1,6 @@
 /*
  * Digital Signature Service Protocol Project.
- * Copyright (C) 2015-2017 e-Contract.be BVBA.
+ * Copyright (C) 2015-2019 e-Contract.be BVBA.
  *
  * This is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License version
@@ -86,7 +86,7 @@ exports['test js2xmlparser'] = function (test) {
     signature.computeSignature(result, {
         prefix: "ds",
         location: {
-            reference: "dss:OptionalInputs"
+            reference: "//*[local-name(.)='OptionalInputs' and namespace-uri(.)='urn:oasis:names:tc:dss:1.0:core:schema']"
         }
     });
     console.log(signature.getSignedXml());
